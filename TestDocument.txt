@@ -1,0 +1,116 @@
+Test Plan
+
+Good Results
+
+1. User types in "java SourceViewer http://athabascau.ca"			
+	EXPECTED:
+	The application will connect to the website and return the entire source code to the user, as they didn't specify an option.
+	ACTUAL:
+	Results are displayed as they are expected. 
+
+2. User types in "java SourceViewer http://athabascau.ca university"
+	EXPECTED:
+	The application will connect to the website and only return the lines that contain university and give a total of times it has occurred.
+	ACTUAL:
+	Results return as expected.
+
+3. User types in "java SourceViewer http://athabascau.ca -n university"
+	EXPECTED:
+	The application will connect to the website and return the lines of the document that have university in them. Also it will
+	return the lines the string occurred on.
+	ACTUAL:
+	Results return as expected.
+	
+4. User types in "java SourceViewer http://athabascau.ca -c university"
+	EXPECTED:
+	The application will connect to the website and return the number of times the string has occurred. 
+	ACTUAL:
+	Results return as expected.
+	
+5. User types in "java SourceViwer 198.252.206.16 Stack" (StackOverFlow)
+	EXPECTED:
+	The application will notice the user typed in an IP address, it will then add the http:// protocol and test the link. If it doesn't work it will add
+	https:// instead. In this case only http:// is needed.
+	ACTUAL:
+	Returns 18 results as expected.
+	
+6. User types in "java SourceViwer 131.232.31.74 University" (Athabasca University)
+	EXPECTED:
+	The application will notice the user typed in an IP address, it will then add the http:// protocol and test the link. If it doesn't work it will add
+	https:// instead. 
+	ACTUAL:
+	Returns 4 results, but always sends me to a 404 page.
+	
+6. User types in "java SourceViwer http://131.232.31.74 University" (Athabasca University)
+	EXPECTED:
+	The application will notice this is a URL, however it will also notice this is a 404 page and return results on that page instead.
+	ACTUAL:
+	Returns 4 results as expected.
+	
+Bad Results
+
+1. User types in "java SourceViewer" with no arguements.
+	EXPECTED:
+	The application will throw an ArrayIndexOutOfBoundsException and inform the user of their mistake by saying, "Please enter at least a URL
+	Usage: <IP Address> | <IP Address> <Search Line> | <IP Address> <Option (-n,-c)> <Search Line>)"
+	ACTUAL:
+	Results return as expected.
+	
+2. User types in "java SourceViewer https://athabascau.ca" (sends to a 404 page)
+	EXPECTED:
+	The application will take note that the user wants to go to a 404 pages and returns the source code for that instead.
+	ACTUAL:
+	Results return as expected.
+	
+3. User types in "java SourceViewer https://athabascau.ca ""<title>""" (sends to a 404 page)
+	EXPECTED:
+	The application again will notice that the page leads to a 404 page, but will still do what the user asked and search for an instance of <title>.
+	Actual:
+	Result:
+	<title>Page Not Found : Athabasca University</title>
+	The line '<title>' has been found: 1 times in this document
+	
+	Results return as expected.
+	
+4. User types "java SourceViewer http://Not A URL"
+	EXPECTED:
+	The application is built to check the validity of URLs and will respond to that as not being a real URL.
+	Actual:
+	Results return as expected.
+	
+5. User types "java SourceViewer http://facebook.com" (Facebook redirects to a https protocol)
+	EXPECTED:
+	Before the application returns data to a user it reads the first line of the source code of a page. In the case there is a https redirect
+	a user would receive no result. The application automatically adjusts the users URL to https so they will receive the source from Facebook.
+	ACTUAL:
+	Results return as expected.
+	
+6. User types "java SourceViewer -c https://www.facebook.com -abcde (4 arguements)
+	EXPECTED:
+	Application notices the abnormal amount of arguments and tells the user how to properly user the program.
+	ACTUAL:
+	Results return as expected.
+	
+7. User forgets protocol "java SourceViwer stackoverflow.com"
+	EXPECTED:
+	Applications warns user to check if the URL is correct and to check if a protocol was added.
+	ACTUAL:
+	Results return as expected
+	
+8. User types "java SourceViewer 10.10.10.10"
+	EXPECTED:
+	Application notices that this is a valid ip address, but an ip address that does not resolve and warns user of this.
+	ACTUAL:
+	Results return as expected.
+	
+9. User types "java SourceViewer 10.20.30"
+	EXPECTED:
+	Application notices that this is not a valid IP address and warns user
+	ACTUAL:
+	Results return as expected.
+
+10 USER types "java SourceViewer 256.0.0.3"
+	EXPECTED:
+	Application notices that this IP address is bad and warns user.
+	ACTUAL:
+	Results return as expected.

@@ -1,0 +1,4 @@
+To compile this program you should only need to issue the command, "javac *.java". After this you should only need to call, "java SourceViewer <ip address> <search term>" 
+There are three options though: placing only an IP address, placing an IP address and s search term, and placing an IP address, option, and search term. For options 
+I have -c for counting the number of times a search term occurred without printing each line it occurred, and -n this would print off each time the search term 
+occurred and the line in the document as well. 
